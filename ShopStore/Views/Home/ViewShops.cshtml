@@ -1,0 +1,35 @@
+﻿@*@model ShopStore.Repository.DbContext.Shop*@
+@model IEnumerable<ShopStore.Repository.DbContext.Shop>
+
+@{
+    ViewBag.Title = "ViewShops";
+}
+<h2>Магазины</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th class="text-center">№</th>
+        <th class="text-center">Название магазина</th>
+        <th class="text-center">Адрес</th>
+        <th class="text-right">Время работы</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var shop in Model)
+        {
+            <tr>
+                <td class="text-center">@shop.ShopId</td>
+                <td class="text-center">@shop.ShopName</td>
+                <td class="text-center">@shop.Address</td>
+                <td class="text-right">@shop.OperatingMode</td>
+                <td>
+                    @using (Html.BeginForm("Products", "Home"))
+                    {
+                        @Html.Hidden("ShopId", shop.ShopId)
+                        <input class="btn btn-sm btn" type="submit" value="Товары"/>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
